@@ -4,6 +4,6 @@ class Array
   end
 
   def discard # re-implemtent .delete_if
-    each_with_object(dup) { |e, a| a.delete e if yield e }
+    each_with_object([]) { |e, a| a << e unless yield e }
   end
 end

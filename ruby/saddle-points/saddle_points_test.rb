@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require_relative 'matrix'
 
-class MatrixTest < MiniTest::Test
+class MatrixTest < MiniTest::Unit::TestCase
 
   def test_extract_a_row
     matrix = Matrix.new("1 2\n10 20")
@@ -32,4 +32,25 @@ class MatrixTest < MiniTest::Test
     matrix = Matrix.new("89 1903 3\n18 3 1\n9 4 800")
     assert_equal [1903, 3, 4], matrix.columns[1]
   end
+
+  def test_no_saddle_point
+    matrix = Matrix.new("2 1\n1 2")
+    assert_equal [], matrix.saddle_points
+  end
+
+  def test_a_saddle_point
+    matrix = Matrix.new("1 2\n3 4")
+    assert_equal [[0, 1]], matrix.saddle_points
+  end
+
+  def test_another_saddle_point
+    matrix = Matrix.new("18 3 39 19 91\n38 10 8 77 320\n3 4 8 6 7")
+    assert_equal [[2, 2]], matrix.saddle_points
+  end
+
+  def test_multiple_saddle_points
+    matrix = Matrix.new("4 5 4\n3 5 5\n1 5 4")
+    assert_equal [[0, 1], [1, 1], [2, 1]], matrix.saddle_points
+  end
+
 end
