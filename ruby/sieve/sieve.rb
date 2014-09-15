@@ -1,12 +1,17 @@
 class Sieve
+  attr_reader :range
+
   def initialize n
-    @range = (2..n).to_a
+    @range = *2..n
   end
 
-  def primes range = @range, n = 0, previous_iteration = []
-    return range if range == previous_iteration
-    previous_iteration = range
-    range -= range[1 + n..-1].keep_if { |x| x % range[n] == 0 }
-    primes range, n + 1, previous_iteration
+  def primes
+    r = range
+    range[0...-1].each_with_index do |e, i|
+      r[i + 1..-1].each do |ee|
+        r[r.index(ee)] = nil if (ee % e == 0) unless ee.nil?
+      end
+    end
+    r.compact
   end
 end
