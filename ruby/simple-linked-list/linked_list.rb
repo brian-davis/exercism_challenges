@@ -6,18 +6,20 @@ class Element
   end
 
   def self.to_a el
-    d = el.datum if el
-    x = el.next.datum if el && el.next
-    [d, x].compact
+    el.to_a
+  end
+
+  def self.from_a arr
+    arr = arr.to_a
+    return nil if arr.empty?
+    Element.new(arr[0], from_a(arr[1..-1]))
+  end
+
+  def to_a
+    [@datum, @next.to_a].flatten
   end
 
   def reverse
-    @datum = if @next
-               @next.datum
-             else
-               @datum
-             end
-    @next = @datum
-    self
+    @next ? Element.new(@next.datum, self) : self
   end
 end

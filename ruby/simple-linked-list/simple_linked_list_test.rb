@@ -28,16 +28,15 @@ class LinkedListTest < MiniTest::Unit::TestCase
     assert_equal 1, one_r.datum
     assert_nil one_r.next
 
-    # two_r = @two.reverse
-    # assert_equal 1, two_r.datum
-    # assert_equal 2, two_r.next.datum
+    two_r = @two.reverse
+    assert_equal 1, two_r.datum
+    assert_equal 2, two_r.next.datum
 
     # ensure that nothing changed about the given objects
     test_constructor
   end
 
   def test_from_a
-    skip
     assert_nil Element.from_a([])
 
     one_a = Element.from_a([1])
@@ -54,7 +53,6 @@ class LinkedListTest < MiniTest::Unit::TestCase
   end
 
   def test_roundtrip
-    skip
     assert_equal [1], Element.from_a([1]).to_a
     assert_equal [2, 1], Element.from_a([2, 1]).to_a
     assert_equal (1..10).to_a, Element.from_a(1..10).to_a

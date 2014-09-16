@@ -2,16 +2,16 @@ class Sieve
   attr_reader :range
 
   def initialize n
-    @range = *2..n
+    @range = 2..n
   end
 
   def primes
-    r = range
-    range[0...-1].each_with_index do |e, i|
-      r[i + 1..-1].each do |ee|
-        r[r.index(ee)] = nil if (ee % e == 0) unless ee.nil?
-      end
+    r = range.to_a
+    r[0..Math.sqrt(r.last)].each do |n|
+      multiples = (n..r.last).step(n).to_a
+      multiples.shift
+      r -= multiples
     end
-    r.compact
+    r
   end
 end
