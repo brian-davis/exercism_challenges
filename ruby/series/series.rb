@@ -1,6 +1,6 @@
 class Series
   def initialize num_str
-    @nums = num_str.chars.map { |x| x.to_i }
+    @nums = num_str.chars.map(&:to_i)
   end
 
   def slices n # re-implemented .each_cons

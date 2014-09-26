@@ -1,5 +1,5 @@
 class Atbash
-  ALPHABET = [*'a'..'z']
+  ALPHABET = *'a'..'z'
   CIPHER =  ALPHABET.reverse
 
   def self.encode text
@@ -8,8 +8,8 @@ class Atbash
         .map { |c| swap c }
         .compact
         .each_slice(5)
-        .map { |s| s.join }
-        .join(' ')
+        .map(&:join)
+        .join ' '
   end
 
   def self.swap c
@@ -19,7 +19,7 @@ class Atbash
     elsif c.match /\W/
       nil
     else
-      CIPHER[ALPHABET.index(c)]
+      CIPHER[ALPHABET.index c]
     end
   end
 end

@@ -6,7 +6,10 @@ class Luhn
   end
 
   def addends
-    number.to_s.chars.map { |x| x.to_i }.reverse
+    number.to_s
+          .chars
+          .map(&:to_i)
+          .reverse
           .map.with_index { |n, i| i.odd? ? double(n) : n }
           .reverse
   end

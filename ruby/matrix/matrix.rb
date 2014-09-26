@@ -9,6 +9,6 @@ class Matrix
   private
 
   def determine_rows str
-    str.split("\n").map { |l| l.split(' ').map { |n| n.to_i } }
+    str.split("\n").map { |l| l.split(' ').map(&:to_i) }
   end
 end

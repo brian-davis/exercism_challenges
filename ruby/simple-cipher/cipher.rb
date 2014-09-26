@@ -1,6 +1,6 @@
 class Cipher
   attr_reader :key
-  ALPHABET = ('a'..'z').to_a
+  ALPHABET = *'a'..'z'
 
   def initialize(key = ('a' * 20))
     fail ArgumentError if key.empty? || key.match(/[A-Z0-9]/)
@@ -19,10 +19,10 @@ class Cipher
 
   def substitute str, options = {}
     str.chars.zip(key.chars).map do |str_c, key_c|
-      cipher = ALPHABET.rotate(ALPHABET.index(key_c))
+      cipher = ALPHABET.rotate(ALPHABET.index key_c)
       tables = [cipher, ALPHABET]
       tables.reverse! if options[:reverse]
-      tables[0][tables[1].index(str_c)]
+      tables[0][tables[1].index str_c]
     end.join
   end
 end

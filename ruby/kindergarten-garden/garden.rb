@@ -4,8 +4,17 @@ class Garden
              grass:    'G',
              violets:  'V' }
 
-  CHILDREN = [:alice, :bob, :charlie, :david, :eve, :fred,
-              :ginny, :harriet, :ileana, :joseph, :kincaid,
+  CHILDREN = [:alice,
+              :bob,
+              :charlie,
+              :david,
+              :eve,
+              :fred,
+              :ginny,
+              :harriet,
+              :ileana,
+              :joseph,
+              :kincaid,
               :larry]
 
   def initialize diagram, students = CHILDREN

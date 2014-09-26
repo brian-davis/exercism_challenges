@@ -12,16 +12,16 @@ class Crypto
   end
 
   def plaintext_segments
-    normalize_plaintext.chars.each_slice(size).map { |s| s.join }
+    normalize_plaintext.chars.each_slice(size).map(&:join)
   end
 
   def ciphertext
     ps = plaintext_segments
     ps << ps.pop.ljust(size, '_')
-    ps.map { |s| s.chars }.transpose.join.gsub /_/, ''
+    ps.map(&:chars).transpose.join.gsub /_/, ''
   end
 
   def normalize_ciphertext
-    ciphertext.chars.each_slice(5).map { |s| s.join } * ' '
+    ciphertext.chars.each_slice(5).map(&:join) * ' '
   end
 end
