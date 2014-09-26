@@ -83,8 +83,18 @@ describe("Bob", function() {
     expect(result).toEqual('Fine. Be that way!');
   });
 
-   it("prolonged silence", function () {
+  it("prolonged silence", function () {
     var result = bob.hey('   ');
     expect(result).toEqual('Fine. Be that way!');
+  });
+
+  it("ellipsis", function () {
+    var result = bob.hey('...');
+    expect(result).toEqual('Fine. Be that way!');
+  });
+
+  it("utf", function () {
+    var result = bob.hey('Ü');
+    expect(result).toEqual('Woah, chill out!');
   });
 });

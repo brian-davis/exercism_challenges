@@ -1,9 +1,4 @@
 var anagram = require('./anagram');
-// a = new anagram('hello')
-
-// console.log(
-//   a.matches(['hello'])
-// )
 
 describe('Anagram', function() {
 

@@ -6,6 +6,6 @@ class Complement
   end
 
   def self.of_rna sequence
-    sequence.chars.each_with_object('') { |c, a| a << PAIRS.invert[c] }
+    sequence.chars.each_with_object('') { |c, a| a << PAIRS.key(c) }
   end
 end

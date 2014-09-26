@@ -18,7 +18,7 @@ class Bob
   end
 
   def silent? sentence
-    sentence.empty? || sentence.gsub(/\s+/, '').empty?
+    sentence.strip.empty?
   end
 
   def yelling? sentence

@@ -93,6 +93,15 @@ class BobTest < MiniTest::Unit::TestCase
 Does this cryogenic chamber make me look fat?
 no})
   end
+
+  def test_on_ellipsis
+    assert_equal 'Fine. Be that way!', ::Bob.new.hey('...')
+    assert_equal 'Fine. Be that way!', ::Bob.new.hey('…')
+  end
+
+  def test_on_utf
+    assert_equal 'Woah, chill out!', ::Bob.new.hey('Ü')
+  end
 end
 
 __END__
