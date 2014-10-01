@@ -1,38 +1,52 @@
 class Queens
-  attr_reader :white, :black, :board
+  attr_reader :white, :black
 
   def initialize coords = { white: [0, 3], black: [7, 3] }
-    fail ArgumentError if coords[:white] == coords[:black]
-    @white = coords[:white]
-    @black = coords[:black]
-    @board = Array.new(64).fill('O').each_slice(8).to_a
+    @white, @black = coords[:white], coords[:black]
+    fail ArgumentError if white == black
+    setup_board
     place_queens
   end
 
   def attack?
-    same_row? || same_column? || on_diagonal?
+    same_row? || same_column? || same_diagonal?
   end
 
   def to_s
-    board.map { |row| row.join ' ' }.join "\n"
+    @board.map { |row| row.join ' ' }.join "\n"
   end
 
   private
 
+  def setup_board
+    @board = Array.new(64, 'O').each_slice(8).to_a
+  end
+
   def place_queens
-    @board[white[0]][white[1]] = 'W'
-    @board[black[0]][black[1]] = 'B'
+    [white.dup << 'W', black.dup << 'B'].each { |x, y, m| @board[x][y] = m }
   end
 
   def same_row?
-    white[0] == black[0]
+    x_coords.uniq.size == 1
   end
 
   def same_column?
-    white[1] == black[1]
+    y_coords.uniq.size == 1
   end
 
-  def on_diagonal?
-    (white[0] - black[0]).abs == (white[1] - black[1]).abs
+  def same_diagonal?
+    difference(x_coords) == difference(y_coords)
+  end
+
+  def x_coords
+    [white, black].map { |x, _y| x }
+  end
+
+  def y_coords
+    [white, black].map { |_x, y| y }
+  end
+
+  def difference arr
+    (arr[0] - arr[1]).abs
   end
 end
