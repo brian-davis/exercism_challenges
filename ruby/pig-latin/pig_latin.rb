@@ -13,9 +13,8 @@ class PigLatin
   end
 
   def latinize
-    str.split(' ').each_with_object([]) do |w, a|
-      r = VOWELS.any? { |v| w.start_with? v } ? vowel_sub(w) : consonant_sub(w)
-      a << r
+    str.split(' ').map do |w|
+      VOWELS.any? { |v| w.start_with? v } ? vowel_sub(w) : consonant_sub(w)
     end.join(' ')
   end
 

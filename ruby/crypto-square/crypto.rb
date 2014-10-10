@@ -1,4 +1,6 @@
 class Crypto
+  FILLER = '_'
+
   def initialize str
     @str = str
   end
@@ -12,13 +14,13 @@ class Crypto
   end
 
   def plaintext_segments
-    normalize_plaintext.chars.each_slice(size).map(&:join)
+    normalize_plaintext.chars.each_slice(size).map &:join
   end
 
   def ciphertext
     ps = plaintext_segments
-    ps << ps.pop.ljust(size, '_')
-    ps.map(&:chars).transpose.join.gsub /_/, ''
+    ps << ps.pop.ljust(size, FILLER)
+    ps.map(&:chars).transpose.join.gsub /#{FILLER}/, ''
   end
 
   def normalize_ciphertext

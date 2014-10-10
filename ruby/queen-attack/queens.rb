@@ -1,9 +1,9 @@
 class Queens
   attr_reader :white, :black
 
-  def initialize coords = { white: [0, 3], black: [7, 3] }
-    @white, @black = coords[:white], coords[:black]
+  def initialize white: [0, 3], black: [7, 3]
     fail ArgumentError if white == black
+    @white, @black = white, black
     setup_board
     place_queens
   end
@@ -23,27 +23,29 @@ class Queens
   end
 
   def place_queens
-    [white.dup << 'W', black.dup << 'B'].each { |x, y, m| @board[x][y] = m }
+    [white.dup << 'W', black.dup << 'B'].each do |row, col, m|
+      @board[row][col] = m
+    end
   end
 
   def same_row?
-    x_coords.uniq.size == 1
+    row_coords.uniq.size == 1
   end
 
   def same_column?
-    y_coords.uniq.size == 1
+    col_coords.uniq.size == 1
   end
 
   def same_diagonal?
-    difference(x_coords) == difference(y_coords)
+    difference(row_coords) == difference(col_coords)
   end
 
-  def x_coords
-    [white, black].map { |x, _y| x }
+  def row_coords
+    [white, black].map { |row, _col| row }
   end
 
-  def y_coords
-    [white, black].map { |_x, y| y }
+  def col_coords
+    [white, black].map { |_row, col| col }
   end
 
   def difference arr
