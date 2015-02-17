@@ -15,7 +15,7 @@ class CustomSet
   end
 
   def difference other
-    CustomSet.new(set - other.set)
+    new_set(set - other.set)
   end
 
   def disjoint? other
@@ -41,7 +41,7 @@ class CustomSet
     c.select! do |x|
       occurences[x] > 1
     end
-    CustomSet.new(c.uniq)
+    new_set(c.uniq)
   end
 
   def member? n
@@ -49,7 +49,7 @@ class CustomSet
   end
 
   def put n
-    CustomSet.new(@set << n)
+    new_set(@set << n)
   end
 
   def size
@@ -73,6 +73,12 @@ class CustomSet
   end
 
   def union other
-    CustomSet.new(set + other.set)
+    new_set(set + other.set)
+  end
+
+  private
+
+  def new_set(arr = [])
+    self.class.new(arr)
   end
 end

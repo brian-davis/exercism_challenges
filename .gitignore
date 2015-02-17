@@ -15,3 +15,9 @@
 /scala
 /swift
 /javascript/node_modules
+/java/
+/lisp/
+/plsql/
+
+
+.DS_Store

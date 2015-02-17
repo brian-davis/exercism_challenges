@@ -10,21 +10,31 @@ class OCR
            ' _ |_||_|' => '8',
            ' _ |_| _|' => '9' }
 
-  attr_reader :text
+  attr_reader :text, :lines
 
   def initialize text
     @text = text
+    @lines = text.split("\n").delete_if { |e| e == '' }
   end
 
   def convert
-    text.split("\n")
-        .delete_if { |e| e == '' }
-        .each_slice(3).with_object([]) do |line, a|
-          sub_lines = line.map { |l| l.chars.each_slice(3).map(&:join) }
-          sub_lines.unshift(['   ']) if sub_lines.size == 2
-          sub_lines.each { |sl| sl.map! { |t| t.ljust(3, ' ') } }
-          sl1, sl2, sl3 = sub_lines
-          a << sl1.zip(sl2, sl3).map(&:join).map { |c| FONT[c] || '?' }.join
-        end.join ','
+    t = triple_line.map do |line|
+      sl1, sl2, sl3 = sub_lines line
+      sl1.zip(sl2, sl3).map(&:join).map { |c| FONT[c] || '?' }.join
+    end
+    t.join ','
+  end
+
+  private
+
+  def triple_line
+    lines.each_slice 3
+  end
+
+  def sub_lines line
+    parts = line.map { |l| l.chars.each_slice(3).map(&:join) }
+    parts.unshift(['   ']) if parts.size == 2
+    parts.each { |p| p.map! { |t| t.ljust 3, ' ' } }
+    parts
   end
 end
