@@ -1,18 +1,17 @@
 function BeerSong() {
     'use strict';
     this.verse = function (n) {
-        if (n === 0) {
+        if (n < 1) {
             return "No more bottles of beer on the wall, no more bottles of beer.\n" +
                    "Go to the store and buy some more, 99 bottles of beer on the wall.\n";
-        } else {
-            var str = '';
-            str += n + ' ' + this.bottles(n) + ' of beer on the wall, ';
-            str += n + ' ' + this.bottles(n) + ' of beer.' + "\n";
-            str += 'Take ' + this.article(n) + ' down and pass it around, ';
-            str += this.negative(n) + ' ' + this.bottles(n - 1)
-            str += ' of beer on the wall.' + "\n";
-            return str;
         }
+        var str = '';
+        str += n + ' ' + this.bottles(n) + ' of beer on the wall, ';
+        str += n + ' ' + this.bottles(n) + ' of beer.' + "\n";
+        str += 'Take ' + this.article(n) + ' down and pass it around, ';
+        str += this.negative(n) + ' ' + this.bottles(n - 1)
+        str += ' of beer on the wall.' + "\n";
+        return str;
     };
 
     this.negative = function (n) {
@@ -40,7 +39,7 @@ function BeerSong() {
     }
 
     this.sing = function (m, n) {
-        var nn = (typeof n === "undefined") ? 1 : n;
+        var nn = (typeof n === "undefined") ? 0 : n;
         var sorted = [m, nn].sort();
         var short = sorted[0];
         var long = sorted[1];
@@ -49,6 +48,7 @@ function BeerSong() {
           range.push(this.verse(m));
         }
         range.reverse();
+        // range.push('No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n');
         var m = range.join("\n");
         return m;
     }

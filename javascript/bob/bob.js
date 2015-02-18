@@ -15,11 +15,11 @@ function Bob() {
 
     // private
     function isSilent (sentence) {
-        return sentence.trim() === '';
+        return (sentence.trim() === '') || (sentence.trim() === '...');
     }
 
     function isYelling (sentence) {
-        return sentence.toUpperCase() === sentence && /[A-Z]/.test(sentence);
+        return sentence.toUpperCase() === sentence && /[A-ZÜ]/.test(sentence);
     }
 
     function isQuestion (sentence) {
