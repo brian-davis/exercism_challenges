@@ -14,7 +14,7 @@ class Crypto
   end
 
   def plaintext_segments
-    normalize_plaintext.chars.each_slice(size).map &:join
+    normalize_plaintext.chars.each_slice(size).map(&:join)
   end
 
   def ciphertext
@@ -24,6 +24,6 @@ class Crypto
   end
 
   def normalize_ciphertext
-    ciphertext.chars.each_slice(5).map(&:join) * ' '
+    ciphertext.chars.each_slice(5).map(&:join).join(' ')
   end
 end
