@@ -49,15 +49,7 @@ function SpaceAge (s) {
     }
 
     function planetYear(p) {
-        return twoDecimalPrecision(
-            (seconds /
-             (earthYearInSeconds * orbitalPeriods[p])
-            )
-        );
-    }
-
-    function twoDecimalPrecision (n) {
-        return (Math.round((n + 0.00001) * 100) / 100);
+        return Number((seconds / (earthYearInSeconds * orbitalPeriods[p])).toFixed(2));
     }
 }
 
