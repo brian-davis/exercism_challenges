@@ -1,9 +1,13 @@
 function compute (strand_a, strand_b) {
     'use strict';
     var sorted = [strand_a, strand_b].sort(function (a, b) {
-                    if (a.length > b.length) { return 1; }
-                    else if (a.length > b.length) { return -1; }
-                    else { return 0; }
+                    if (a.length > b.length) {
+                        return 1;
+                    } else if (a.length > b.length) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
                  }),
         count = 0,
         i = 0;

@@ -15,15 +15,17 @@ function Bob() {
 
     // private
     function isSilent (sentence) {
-        return (sentence.trim() === '') || (sentence.trim() === '...');
+        return ((sentence.trim() === '') ||
+                (sentence.trim() === '...'));
     }
 
     function isYelling (sentence) {
-        return sentence.toUpperCase() === sentence && /[A-ZÜ]/.test(sentence);
+        return (sentence.toUpperCase() === sentence &&
+                /[A-ZÜ]/.test(sentence));
     }
 
     function isQuestion (sentence) {
-        return sentence[sentence.length - 1] === '?';
+        return (sentence[sentence.length - 1] === '?');
     }
 }
 
