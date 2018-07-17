@@ -16,15 +16,18 @@ defmodule SecretHandshake do
   @spec commands(code :: integer) :: list(String.t())
   def commands(code) do
     actions  = ["wink", "double blink", "close your eyes", "jump"]
-    reversed = Integer.digits(code, 2) |>
-               Enum.reverse()
-    mapped   = Enum.zip(actions, reversed) |>
-               Enum.reject(fn({_c, d}) -> d == 0 end) |>
-               Enum.map(fn({c, _d}) -> c end)
-    if length(reversed) == 5 do
-      Enum.reverse(mapped)
-    else
-      mapped
+    mapped = code |>
+             Integer.digits(2) |>
+             Enum.reverse() |>
+             Enum.zip(actions) |>
+             Enum.reject(fn({c, _d}) -> c == 0 end) |>
+             Enum.map(fn({_c, d}) -> d end)
+
+    cond do
+      length(Integer.digits(code, 2)) == 5 ->
+        Enum.reverse(mapped)
+      true ->
+        mapped
     end
   end
 end
